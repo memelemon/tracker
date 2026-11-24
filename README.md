@@ -1,5 +1,11 @@
 # ARTIST IMPACT TRACKER
 
+> <details>
+> <summary>⚠️ ЛИЧНОЕ ИСПОЛЬЗОВАНИЕ</summary>
+>
+> Этот репозиторий и календарь предназначены исключительно для личного пользования meme_lemon. Это персональный архив творческой активности, а не публичный проект или открытая статистика.
+> </details>
+
 Private visual archive for monthly artistic work.
 
 ## Files
