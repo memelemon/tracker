@@ -39,9 +39,9 @@ $('#monthScore').textContent=Math.round(average);
 $('#monthBar').style.width=average+'%';
 $('#monthBar').style.background='linear-gradient(90deg,#537bdc,#ff9a52,#b7f36b)';
 $('#monthState').textContent='● '+band+' / УЧТЁННАЯ АКТИВНОСТЬ';
-$('#hero').style.background='radial-gradient(ellipse at 88% 0%,rgba(255,154,82,'+(0.04+average/500)+'),transparent 48%),linear-gradient(140deg,rgba(255,154,82,.09),rgba(16,26,49,.97) 58%,#080d19)';
+$('#hero').style.background='linear-gradient(110deg,rgba(255,154,82,'+(0.04+average/600)+'),#101a2b 70%)';
 const first=new Date(month.id+'-01T12:00:00');const offset=(first.getDay()+6)%7;
-const cal=$('#calendar');['M','T','W','T','F','S','S'].forEach(d=>{let e=document.createElement('div');e.className='weekday';e.textContent=d;cal.append(e)});
+const cal=$('#calendar');['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'].forEach(d=>{let e=document.createElement('div');e.className='weekday';e.textContent=d;cal.append(e)});
 for(let i=0;i<offset;i++){let e=document.createElement('div');e.className='day empty';cal.append(e)}
 const reportDays=new Set(month.reports.map(r=>Number(r.date.slice(-2))));
 const coverEnd=Math.max(0,...month.reports.map(r=>Number(r.coverageEnd.slice(-2))));
