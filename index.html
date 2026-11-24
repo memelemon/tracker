@@ -27,7 +27,7 @@ main{max-width:760px;margin:auto;padding:22px 16px 70px}.top{display:flex;align-
 <section class="section"><div class="section-head"><h2>НЕДЕЛИ</h2></div><div class="weeks" id="weeks"></div></section>
 <section class="section"><div class="section-head"><h2>КАТЕГОРИИ РАБОТЫ</h2></div><div class="categories" id="categories"></div></section>
 <section class="section"><div class="section-head"><h2>ОТЧЁТЫ</h2></div><div id="reports"></div></section>
-<div class="footer">ВНУТРЕННЯЯ ОТЧЁТНОСТЬ · MEME_LEMON</div></main>
+</main>
 <script>
 fetch('./data.json').then(r=>r.json()).then(DATA=>{
 const $=s=>document.querySelector(s);
@@ -51,7 +51,7 @@ for(let d=1;d<=month.days;d++){
  if(reportDays.has(d)){e.classList.add('report');e.title='Report logged';e.style.background='#8dff9b';}
  cal.append(e)
 }
-month.weeks.forEach(w=>{let e=document.createElement('div');e.className='week';e.style.borderTop='2px solid '+colorFor(w.score);e.innerHTML='<div class="w">НЕДЕЛЯ 0'+w.id+'</div><div class="n" style="color:'+colorFor(w.score)+'">'+w.score+'%</div><div class="dates">'+String(w.start).padStart(2,'0')+'–'+String(w.end).padStart(2,'0')+'</div><div class="state">'+(w.status==='no-log'?'НЕТ ОТЧЁТА':w.status==='provisional'?'ПРЕДВАРИТЕЛЬНО':'ЗАПИСАНО')+'</div>';$('#weeks').append(e)});
+month.weeks.forEach(w=>{let e=document.createElement('div');e.className='week';e.style.borderTop='2px solid '+colorFor(w.score);e.innerHTML='<div class="w">НЕДЕЛЯ 0'+w.id+'</div><div class="n" style="color:'+colorFor(w.score)+'">'+w.score+'%</div><div class="dates">'+String(w.start).padStart(2,'0')+'–'+String(w.end).padStart(2,'0')+'</div>';$('#weeks').append(e)});
 DATA.categories.forEach(c=>{let e=document.createElement('div');e.className='cat';let v=c.score===null?'—':c.score+'%';e.innerHTML='<div class="cat-top"><span class="cat-name">'+c.name+'</span><span class="cat-val">'+v+'</span></div><div class="cat-track"><i style="width:'+(c.score||0)+'%;background:'+colorFor(c.score||0)+'"></i></div>';$('#categories').append(e)});
 
 month.reports.slice().reverse().forEach(r=>{let e=document.createElement('article');e.className='report';e.innerHTML='<div class="report-date">'+r.date+' / НЕДЕЛЯ 0'+r.week+'</div><h3>'+r.title+'</h3><div class="summary">'+r.summary+'<br>'+r.reach+'</div><ul>'+r.items.map(x=>'<li>'+x+'</li>').join('')+'</ul><div class="note">'+r.note+'</div>';$('#reports').append(e)});
