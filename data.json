@@ -1,0 +1,140 @@
+{
+  "title": "ARTIST IMPACT",
+  "timezone": "Europe/Zurich",
+  "currentMonth": "2026-11",
+  "scale": {
+    "bands": [
+      {
+        "min": 90,
+        "label": "green"
+      },
+      {
+        "min": 70,
+        "label": "lime"
+      },
+      {
+        "min": 45,
+        "label": "yellow"
+      },
+      {
+        "min": 20,
+        "label": "orange"
+      },
+      {
+        "min": 1,
+        "label": "blue"
+      },
+      {
+        "min": 0,
+        "label": "navy"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "production",
+      "name": "Production",
+      "full": "Artistic Production",
+      "score": 90
+    },
+    {
+      "id": "concept",
+      "name": "Concept",
+      "full": "Concept Development",
+      "score": 85
+    },
+    {
+      "id": "technical",
+      "name": "Technical",
+      "full": "Technical Skills",
+      "score": 80
+    },
+    {
+      "id": "influence",
+      "name": "Influence",
+      "full": "Influence",
+      "score": 60
+    },
+    {
+      "id": "personal",
+      "name": "Personal",
+      "full": "Personal Development",
+      "score": 70
+    },
+    {
+      "id": "education",
+      "name": "Research",
+      "full": "Education / Research",
+      "score": null
+    },
+    {
+      "id": "connections",
+      "name": "Connections",
+      "full": "Connections",
+      "score": null
+    },
+    {
+      "id": "collaboration",
+      "name": "Collab",
+      "full": "Collaboration",
+      "score": 15
+    }
+  ],
+  "months": [
+    {
+      "id": "2026-11",
+      "label": "NOVEMBER 2026",
+      "days": 30,
+      "weeks": [
+        {
+          "id": 1,
+          "start": 1,
+          "end": 7,
+          "score": 0,
+          "status": "no-log"
+        },
+        {
+          "id": 2,
+          "start": 8,
+          "end": 14,
+          "score": 0,
+          "status": "no-log"
+        },
+        {
+          "id": 3,
+          "start": 15,
+          "end": 21,
+          "score": 0,
+          "status": "no-log"
+        },
+        {
+          "id": 4,
+          "start": 22,
+          "end": 30,
+          "score": 70,
+          "status": "provisional"
+        }
+      ],
+      "reports": [
+        {
+          "date": "2026-11-24",
+          "coverageStart": "2026-11-01",
+          "coverageEnd": "2026-11-24",
+          "week": 4,
+          "title": "NOVEMBER / REPORT 01",
+          "summary": "3 проекта · 2 шрифта",
+          "reach": "30k reach · 100 site visits",
+          "items": [
+            "Создан экспериментальный шрифт Street Antique",
+            "Опубликованы материалы на Reddit; первичный охват около 30k, около 100 переходов на сайт",
+            "Завершён проект квартиры для игры исторической реконструкции",
+            "Сохранены удачные рендеры для портфолио",
+            "Создан полный латинский шрифт на основе повторяющихся примитивных форм камней"
+          ],
+          "note": "Отчёт накопительный за 1–24 ноября. Дата записи — 24 ноября; неделя 4 отмечена предварительно, недельная разбивка предыдущих работ неизвестна."
+        }
+      ],
+      "secret": "Ты не обязан каждый день создавать шедевр. Но каждый оставленный след делает картину месяца яснее."
+    }
+  ]
+}
