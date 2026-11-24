@@ -8,32 +8,39 @@
 :root{color-scheme:dark;--bg:#080d19;--panel:#101a2b;--muted:#8190a8;--text:#edf3ff;--line:#25334a;--green:#b7f36b}
 *{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
 main{max-width:720px;margin:auto;padding:20px 16px 60px}.top{margin-bottom:16px}.main-site{color:var(--green);text-decoration:none;font-size:13px;font-weight:750}
-h1{font-size:26px;letter-spacing:-.04em;margin:0 0 12px}.disclaimer{font-size:12px;color:#a7b5cb;line-height:1.6;margin:0 0 23px;padding:12px 13px;border-left:2px solid #b7f36b;background:#0d1727}
-.section{margin-top:26px}.section-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 1px 12px}.section h2{font-size:12px;font-weight:750;letter-spacing:.08em;color:#b9c7da;margin:0}.month-label{font:10px ui-monospace,monospace;color:var(--muted)}
-.task-progress{height:3px;background:#1b2940;margin:0 0 12px;border-radius:5px;overflow:hidden}.task-progress i{display:block;height:100%;background:var(--green);width:0;transition:width .2s}.task-list{display:grid;gap:7px}.task{display:flex;gap:11px;align-items:flex-start;padding:12px;background:var(--panel);border:1px solid rgba(135,155,190,.12);border-radius:8px}.task input{accent-color:var(--green);width:16px;height:16px;margin:2px 0 0;flex:none}.task span{font-size:12px;line-height:1.5;color:#dce6f4}.task.done span{color:#77869e;text-decoration:line-through}
-.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:11px 12px;font:13px inherit;margin:0 0 13px;outline:none}.search:focus{border-color:#7088ad}.archive-count{font-size:10px;color:var(--muted);margin:0 0 4px}
+h1{font-size:26px;letter-spacing:-.04em;margin:0 0 12px}.disclaimer{font-size:12px;color:#a7b5cb;line-height:1.6;margin:0;padding:12px 13px;border-left:2px solid #b7f36b;background:#0d1727}
+.section{margin-top:25px}.section-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 1px 12px}.section h2{font-size:12px;font-weight:750;letter-spacing:.08em;color:#b9c7da;margin:0}.month-label{font:10px ui-monospace,monospace;color:var(--muted)}
+.month-summary{font-size:13px;line-height:1.65;color:#dce6f4;background:var(--panel);border:1px solid rgba(135,155,190,.12);border-radius:8px;padding:13px}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.weekday{text-align:center;font:9px ui-monospace,monospace;color:#66758f;padding:2px 0 5px}.day{aspect-ratio:1;border-radius:6px;background:#111a2a;border:1px solid rgba(132,153,187,.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:#7f8da5;min-width:0}.day.empty{background:transparent;border-color:transparent}.day.covered{background:#284c3b;color:#c7f4d1}.day.report{background:#b7f36b;color:#07121b;font-weight:800;border:1px solid rgba(255,255,255,.65)}
+.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:11px 12px;font:13px inherit;margin:0 0 10px;outline:none}.search:focus{border-color:#7088ad}.archive-count{font-size:10px;color:var(--muted);margin:0 0 4px}
 .post{padding:16px 2px 18px;border-bottom:1px solid #202d41}.post-date{font:10px ui-monospace,monospace;color:#8190a8;margin-bottom:10px}.post-text{font-size:14px;line-height:1.75;color:#e2eaf6;white-space:pre-wrap;overflow-wrap:anywhere}.empty{font-size:12px;color:var(--muted);padding:16px 0}
-@media(min-width:600px){main{padding:32px 24px 70px}.disclaimer{font-size:13px;padding:14px 16px}.post{padding:19px 2px 21px}.post-text{font-size:15px}}
+@media(min-width:600px){main{padding:32px 24px 70px}.disclaimer{font-size:13px;padding:14px 16px}.calendar{gap:9px}.day{border-radius:9px;font-size:13px}.post{padding:19px 2px 21px}.post-text{font-size:15px}}
 </style></head><body><main>
 <div class="top"><a class="main-site" href="https://memelemon.space/" target="_blank" rel="noopener">← Основной сайт memelemon.space</a></div>
 <h1>Дневник работы</h1>
 <p class="disclaimer">Это личный рабочий дневник meme_lemon. Сам meme_lemon пишет отчёты и рассказывает, что было сделано. ChatGPT оценивает значимость выполненной работы, а алгоритм раскладывает записи по категориям, считает показатели и обновляет календарь. Если вы здесь впервые - можете просто смотреть, как продвигаются проекты. Это открытая страница внутренней отчётности, а не рейтинг и не публичное портфолио.</p>
-<section class="section"><div class="section-head"><h2>ЗАДАЧИ НА МЕСЯЦ</h2><span class="month-label" id="taskMonth"></span></div><div class="task-progress"><i id="taskProgress"></i></div><div class="task-list" id="tasks"></div></section>
-<section class="section"><div class="section-head"><h2>ЗАПИСИ</h2></div><input class="search" id="search" type="search" placeholder="Найти запись..."><div class="archive-count" id="archiveCount"></div><div id="posts"></div></section>
+<section class="section"><div class="section-head"><h2>ЗА МЕСЯЦ</h2><span class="month-label" id="monthLabel"></span></div><div class="month-summary" id="monthSummary"></div></section>
+<section class="section"><div class="section-head"><h2>КАЛЕНДАРЬ</h2></div><div class="calendar" id="calendar"></div></section>
+<section class="section"><div class="section-head"><h2>ЗАПИСИ</h2></div><input class="search" id="search" type="search" placeholder="Поиск по записям..."><div class="archive-count" id="archiveCount"></div><div id="posts"></div></section>
 </main>
 <script>
 fetch('./data.json').then(r=>r.json()).then(DATA=>{
 const $=s=>document.querySelector(s);
-const taskSet=(DATA.tasksByMonth||[]).find(x=>x.id===DATA.taskMonth);
-if(taskSet){
- $('#taskMonth').textContent=taskSet.label;
- const root=$('#tasks'),key='meme-lemon-tasks-'+taskSet.id;
- let checked={};try{checked=JSON.parse(localStorage.getItem(key)||'{}')}catch{}
- function updateProgress(){const done=taskSet.tasks.filter(t=>checked[t.id]).length;$('#taskProgress').style.width=(done/taskSet.tasks.length*100)+'%'}
- taskSet.tasks.forEach(t=>{const label=document.createElement('label');label.className='task'+(checked[t.id]?' done':'');const input=document.createElement('input');input.type='checkbox';input.checked=!!checked[t.id];const span=document.createElement('span');span.textContent=t.text;input.addEventListener('change',()=>{checked[t.id]=input.checked;localStorage.setItem(key,JSON.stringify(checked));label.classList.toggle('done',input.checked);updateProgress()});label.append(input,span);root.append(label)});
- updateProgress();
-}
 const months=DATA.months.slice().sort((a,b)=>b.id.localeCompare(a.id));
+const current=months.find(m=>m.id===DATA.currentMonth)||months[0];
+if(current){
+ $('#monthLabel').textContent=current.label||current.id;
+ $('#monthSummary').textContent=current.summary||'';
+ const first=new Date(current.id+'-01T12:00:00'),offset=(first.getDay()+6)%7,cal=$('#calendar');
+ ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'].forEach(d=>{const e=document.createElement('div');e.className='weekday';e.textContent=d;cal.append(e)});
+ for(let i=0;i<offset;i++){const e=document.createElement('div');e.className='day empty';cal.append(e)}
+ const reports=current.reports||[],reportDays=new Set(reports.map(r=>Number(r.date.slice(-2))));
+ const coverEnd=Math.max(0,...reports.map(r=>Number((r.coverageEnd||r.date).slice(-2))));
+ for(let d=1;d<=current.days;d++){const e=document.createElement('div');e.className='day';e.textContent=d;
+ if(d<=coverEnd)e.classList.add('covered');
+ if(reportDays.has(d))e.classList.add('report');
+ cal.append(e)}
+}
 const records=months.flatMap(m=>(m.reports||[]).map(r=>({...r}))).sort((a,b)=>b.date.localeCompare(a.date));
 function render(){
  const q=$('#search').value.trim().toLocaleLowerCase();
