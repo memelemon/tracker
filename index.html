@@ -1,55 +1,162 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080d19"><meta name="description" content="Личный рабочий дневник meme_lemon.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111">
 <title>Дневник работы — meme_lemon</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
 <style>
-:root{color-scheme:dark;--bg:#080d19;--panel:#101a2b;--muted:#8190a8;--text:#edf3ff;--line:#25334a;--green:#b7f36b}
-*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-main{max-width:720px;margin:auto;padding:20px 16px 60px}.top{margin-bottom:16px}.main-site{color:var(--green);text-decoration:none;font-size:13px;font-weight:750}
-h1{font-size:26px;letter-spacing:-.04em;margin:0 0 12px}.disclaimer{font-size:12px;color:#a7b5cb;line-height:1.6;margin:0;padding:12px 13px;border-left:2px solid #b7f36b;background:#0d1727}
-.section{margin-top:25px}.section-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 1px 12px}.section h2{font-size:12px;font-weight:750;letter-spacing:.08em;color:#b9c7da;margin:0}.month-label{font:10px ui-monospace,monospace;color:var(--muted)}
-.month-summary{font-size:13px;line-height:1.65;color:#dce6f4;background:var(--panel);border:1px solid rgba(135,155,190,.12);border-radius:8px;padding:13px}
-.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.weekday{text-align:center;font:9px ui-monospace,monospace;color:#66758f;padding:2px 0 5px}.day{aspect-ratio:1;border-radius:6px;background:#111a2a;border:1px solid rgba(132,153,187,.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:#7f8da5;min-width:0}.day.empty{background:transparent;border-color:transparent}.day.covered{color:#a9b8ce}.day.report{background:#b7f36b;color:#07121b;font-weight:800;border:1px solid rgba(255,255,255,.65)}.day.report{background:#b7f36b;color:#07121b;font-weight:800;border:1px solid rgba(255,255,255,.65)}
-.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:11px 12px;font:13px inherit;margin:0 0 10px;outline:none}.search:focus{border-color:#7088ad}.archive-count{font-size:10px;color:var(--muted);margin:0 0 4px}
-.post{padding:16px 2px 18px;border-bottom:1px solid #202d41}.latest-post{background:linear-gradient(110deg,rgba(183,243,107,.09),rgba(16,26,43,0));border-left:2px solid var(--green);padding:14px 12px 16px;margin:0 0 8px}.post-date{font:10px ui-monospace,monospace;color:#8190a8;margin-bottom:10px}.post-text{font-size:14px;line-height:1.75;color:#e2eaf6;white-space:pre-wrap;overflow-wrap:anywhere}.empty{font-size:12px;color:var(--muted);padding:16px 0}
-@media(min-width:600px){main{padding:32px 24px 70px}.disclaimer{font-size:13px;padding:14px 16px}.calendar{gap:9px}.day{border-radius:9px;font-size:13px}.post{padding:19px 2px 21px}.post-text{font-size:15px}}
-</style></head><body><main>
-<div class="top"><a class="main-site" href="https://memelemon.space/" target="_blank" rel="noopener">← Основной сайт memelemon.space</a></div>
+*{box-sizing:border-box}
+body{margin:0;background:#111;color:#eee;font-family:Inter,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:18px 14px 50px}
+a{color:#b7f36b}
+h1{font-size:25px;font-weight:600;margin:14px 0 8px}
+h2{font-size:17px;font-weight:600;margin:0 0 12px}
+p{line-height:1.5}
+.top{margin-bottom:20px}
+.note{font-size:13px;color:#bbb;margin:0 0 24px}
+section{margin-top:25px}
+#monthSummary,.day-panel,#calendar-wrap{background:#1b1b1b;border:1px solid #444;padding:12px}
+#monthSummary{font-size:14px;line-height:1.55}
+#calendar-wrap{padding:10px}
+#calendar{font-size:13px}
+.fc{--fc-border-color:#555;--fc-page-bg-color:#1b1b1b;--fc-neutral-bg-color:#252525;--fc-list-event-hover-bg-color:#333;--fc-today-bg-color:rgba(183,243,107,.13);--fc-button-bg-color:#333;--fc-button-border-color:#555;--fc-button-hover-bg-color:#4a4a4a;--fc-button-hover-border-color:#777;--fc-button-active-bg-color:#b7f36b;--fc-button-active-border-color:#b7f36b;--fc-button-text-color:#eee}
+.fc .fc-toolbar-title{font-size:18px;font-weight:500}
+.fc .fc-button{font-size:12px;text-transform:none;padding:5px 8px;box-shadow:none}
+.fc .fc-daygrid-day-number{color:#ddd;text-decoration:none;padding:6px}
+.fc .fc-col-header-cell-cushion{color:#aaa;text-decoration:none;font-weight:400;padding:7px 2px}
+.fc .fc-daygrid-day-frame{min-height:48px}
+.fc .fc-daygrid-day.report-day{background:#b7f36b;color:#111}
+.fc .fc-daygrid-day.report-day .fc-daygrid-day-number{color:#111;font-weight:700}
+.fc .fc-daygrid-day.covered-day{background:#344331}
+.fc .fc-daygrid-day.selected-day{outline:2px solid #eee;outline-offset:-2px}
+.day-panel{margin-top:10px;min-height:105px}
+.day-date{font-size:13px;color:#b7f36b;margin-bottom:9px}
+.day-content{font-size:14px;line-height:1.6;white-space:pre-wrap}
+.search{width:100%;padding:10px;background:#1b1b1b;border:1px solid #555;color:#eee;font:14px Arial,sans-serif;margin-bottom:10px}
+.archive-count{font-size:12px;color:#aaa;margin:0 0 8px}
+.post{padding:13px 2px;border-bottom:1px solid #444}
+.post-date{font-size:12px;color:#b7f36b;margin-bottom:7px}
+.post-text{font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{font-size:13px;color:#aaa;padding:12px 0}
+@media(max-width:520px){
+ main{padding:14px 10px 40px}
+ .fc .fc-toolbar{display:flex;flex-wrap:wrap;gap:8px}
+ .fc .fc-toolbar-title{font-size:16px}
+ .fc .fc-button{padding:5px 6px;font-size:11px}
+ .fc .fc-daygrid-day-frame{min-height:40px}
+}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="https://memelemon.space/">← memelemon.space</a></div>
 <h1>Дневник работы</h1>
-<p class="disclaimer">Это личный рабочий дневник meme_lemon. Сам meme_lemon пишет отчёты и рассказывает, что было сделано. ChatGPT оценивает значимость выполненной работы, а алгоритм раскладывает записи по категориям, считает показатели и обновляет календарь. Если вы здесь впервые - можете просто смотреть, как продвигаются проекты. Это открытая страница внутренней отчётности, а не рейтинг и не публичное портфолио.</p>
-<section class="section"><div class="section-head"><h2>ЗА МЕСЯЦ</h2><span class="month-label" id="monthLabel"></span></div><div class="month-summary" id="monthSummary"></div></section>
-<section class="section"><div class="section-head"><h2>КАЛЕНДАРЬ</h2></div><div class="calendar" id="calendar"></div></section>
-<section class="section"><div class="section-head"><h2>ЗАПИСИ</h2></div><input class="search" id="search" type="search" placeholder="Поиск по записям..."><div class="archive-count" id="archiveCount"></div><div id="posts"></div></section>
+<p class="note">Личный дневник проектов и сделанных вещей.</p>
+
+<section>
+<h2>Месяц</h2>
+<div id="monthSummary">Загрузка...</div>
+</section>
+
+<section>
+<h2>Календарь</h2>
+<div id="calendar-wrap"><div id="calendar"></div></div>
+<div class="day-panel">
+<div class="day-date" id="dayDate"></div>
+<div class="day-content" id="dayContent"></div>
+</div>
+</section>
+
+<section>
+<h2>Все записи</h2>
+<input class="search" id="search" type="search" placeholder="Поиск по записям...">
+<div class="archive-count" id="archiveCount"></div>
+<div id="posts"></div>
+</section>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 <script>
-fetch('./data.json?v=20261124-2',{cache:'no-store'}).then(r=>r.json()).then(DATA=>{
-const $=s=>document.querySelector(s);
-const months=DATA.months.slice().sort((a,b)=>b.id.localeCompare(a.id));
-const current=months.find(m=>m.id===DATA.currentMonth)||months[0];
-if(current){
- $('#monthLabel').textContent=current.label||current.id;
- $('#monthSummary').textContent=current.summary||'';
- const first=new Date(current.id+'-01T12:00:00'),offset=(first.getDay()+6)%7,cal=$('#calendar');
- ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'].forEach(d=>{const e=document.createElement('div');e.className='weekday';e.textContent=d;cal.append(e)});
- for(let i=0;i<offset;i++){const e=document.createElement('div');e.className='day empty';cal.append(e)}
- const reports=current.reports||[],reportDays=new Set(reports.map(r=>Number(r.date.slice(-2))));
- const coverEnd=Math.max(0,...reports.map(r=>Number((r.coverageEnd||r.date).slice(-2))));
- for(let d=1;d<=current.days;d++){const e=document.createElement('div');e.className='day';e.textContent=d;
- if(d<=coverEnd){e.classList.add('covered');const t=d/coverEnd;e.style.background='rgb('+Math.round(17+124*t)+','+Math.round(27+228*t)+','+Math.round(49+106*t)+')';e.style.color=t>.55?'#07121b':'#a9b8ce'}
- if(reportDays.has(d)){e.classList.add('report');e.style.background='#b7f36b'}
- cal.append(e)}
+fetch('./data.json?v=20261125-1',{cache:'no-store'})
+.then(response=>response.json())
+.then(DATA=>{
+const months=DATA.months||[];
+const reports=months.flatMap(month=>month.reports||[]);
+const reportDates=new Set(reports.map(report=>report.date));
+const selectedDate={value:new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-'+String(new Date().getDate()).padStart(2,'0')};
+
+function findMonth(date){
+return months.find(month=>month.id===date.slice(0,7));
 }
-const records=months.flatMap(m=>(m.reports||[]).map(r=>({...r}))).sort((a,b)=>b.date.localeCompare(a.date));
-function render(){
- const q=$('#search').value.trim().toLocaleLowerCase();
- const found=records.filter(r=>(r.rawText||'').toLocaleLowerCase().includes(q));
- $('#archiveCount').textContent=found.length+' записей';
- const root=$('#posts');root.replaceChildren();
- if(!found.length){const e=document.createElement('div');e.className='empty';e.textContent='Ничего не найдено';root.append(e);return}
- found.forEach((r,i)=>{const article=document.createElement('article');article.className='post'+(i===0?' latest-post':'');const date=document.createElement('div');date.className='post-date';date.textContent=r.date;const content=document.createElement('div');content.className='post-text';content.textContent=r.rawText??'';article.append(date,content);root.append(article)});
+function showDay(date){
+selectedDate.value=date;
+const report=reports.find(item=>item.date===date);
+document.getElementById('dayDate').textContent=new Date(date+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+document.getElementById('dayContent').textContent=report?report.rawText:'На эту дату записей пока нет.';
+document.querySelectorAll('.fc-daygrid-day').forEach(cell=>{
+cell.classList.toggle('selected-day',cell.dataset.date===date);
+});
 }
-$('#search').addEventListener('input',render);render();
-}).catch(()=>{document.querySelector('main').textContent='Не удалось загрузить данные.'});
-</script></body></html>
+function showMonth(date){
+const month=findMonth(date);
+document.getElementById('monthSummary').textContent=month?(month.summary||'Для этого месяца пока нет сводки.'):'Записей за этот месяц пока нет.';
+}
+
+const calendarEl=document.getElementById('calendar');
+const calendar=new FullCalendar.Calendar(calendarEl,{
+initialView:'dayGridMonth',
+initialDate:DATA.currentMonth+'-01',
+firstDay:1,
+height:'auto',
+fixedWeekCount:false,
+headerToolbar:{left:'prev,next today',center:'title',right:''},
+buttonText:{today:'Сегодня'},
+dateClick:info=>showDay(info.dateStr),
+datesSet:info=>{
+const date=info.view.currentStart.toISOString().slice(0,10);
+showMonth(date);
+},
+dayCellDidMount:info=>{
+const date=info.date.toLocaleDateString('en-CA');
+if(reportDates.has(date)) info.el.classList.add('report-day');
+else{
+const month=findMonth(date);
+if(month){
+const inCoverage=(month.reports||[]).some(report=>report.coverageStart&&report.coverageEnd&&date>=report.coverageStart&&date<=report.coverageEnd);
+if(inCoverage) info.el.classList.add('covered-day');
+}
+}
+}
+});
+calendar.render();
+showDay(selectedDate.value);
+
+const records=reports.slice().sort((a,b)=>b.date.localeCompare(a.date));
+function renderPosts(){
+const query=document.getElementById('search').value.trim().toLocaleLowerCase();
+const found=records.filter(item=>(item.rawText||'').toLocaleLowerCase().includes(query));
+document.getElementById('archiveCount').textContent=found.length+' записей';
+const root=document.getElementById('posts');
+root.replaceChildren();
+if(!found.length){
+const empty=document.createElement('div');empty.className='empty';empty.textContent='Ничего не найдено';root.append(empty);return;
+}
+found.forEach(item=>{
+const article=document.createElement('article');article.className='post';
+const date=document.createElement('div');date.className='post-date';date.textContent=item.date;
+const content=document.createElement('div');content.className='post-text';content.textContent=item.rawText||'';
+article.append(date,content);root.append(article);
+});
+}
+document.getElementById('search').addEventListener('input',renderPosts);
+renderPosts();
+})
+.catch(error=>{
+document.getElementById('monthSummary').textContent='Не удалось загрузить данные.';
+console.error(error);
+});
+</script>
+</body>
+</html>
