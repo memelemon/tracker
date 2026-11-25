@@ -87,6 +87,7 @@ const reports=months.flatMap(month=>month.reports||[]);
 const reportDates=new Set(reports.map(report=>report.date));
 const selectedDate={value:new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-'+String(new Date().getDate()).padStart(2,'0')};
 
+function dateToISO(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');}
 function findMonth(date){
 return months.find(month=>month.id===date.slice(0,7));
 }
@@ -115,11 +116,11 @@ headerToolbar:{left:'prev,next today',center:'title',right:''},
 buttonText:{today:'Сегодня'},
 dateClick:info=>showDay(info.dateStr),
 datesSet:info=>{
-const date=info.view.currentStart.toISOString().slice(0,10);
+const date=dateToISO(info.view.currentStart);
 showMonth(date);
 },
 dayCellDidMount:info=>{
-const date=info.date.toLocaleDateString('en-CA');
+const date=dateToISO(info.date);
 if(reportDates.has(date)) info.el.classList.add('report-day');
 else{
 const month=findMonth(date);
